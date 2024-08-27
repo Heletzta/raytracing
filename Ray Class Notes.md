@@ -278,3 +278,71 @@ Design question: compute the normal if we hit something?
     Simple solution: compute a bundle of things, store it in some structure
 
 
+
+6.4 Front Faces Versus Back Faces
+
+The second design decision for normals is whether they should always point out
+
+Presently: normal found will always be in the direction of the center to the intersection point (pointing out)
+
+If ray intersects the sphere from the outside, the normal points against the ray!
+
+If the ray intersects the sphere from the inside, the normal points with the ray!
+
+We can have the normal always point against the ray. If the ray is outside the sphere, the normal will point outward, but if the ray is inside the sphere, the normal will point inward.
+
+
+Need to choose one of the possibilities -- will later want to determine which side of the surface a ray is coming from.
+
+Important for objects that are rendered differently on each side -- text on a two-sided sheet of paper, or for objects that have an inside and an outside, like glass balls
+
+If we decide that normal always points out: need to determine which side the ray is on when we color it
+Can figure it out by comparing the ray with the normal:
+    If ray and normal are in the same direction, the ray is inside the object
+    If the the ray and the normal face opposite directions, then the ray is outside of the object
+
+This can be determined by taking the dot product of the two vectors, where if their dot is +, the ray is inside the sphere, and -, then outside
+
+if (dot(ray_direction, outward_normal) > 0.0) {
+    // ray is inside the sphere
+    ...
+} else {
+    // ray is outside the sphere
+    ...
+}
+
+If decide to have the normals point against the ray, won't be able to user the dot product to determine which side of the surface the ray is on! Need to store that information instead: 
+
+bool front_face;
+if (dot(ray_direction, outward_normal) > 0.0) {
+    // ray is inside the sphere
+    normal = -outward_normal;
+    front_face = false;
+} else {
+    // ray is outside the sphere
+    normal = outward_normal;
+    front_face = true;
+}
+
+Set things up so that normals always point "outward" from the surface, or always point against the incident ray. 
+
+Decision is determined by whether you want to determine the side of the surface at the time of geometry intersection or at the time of coloring.
+
+More material types than geo types in this project --> put the determination at geometry time!
+
+Add the front_face boolean to the hit_record class
+
+Add a function to solve the calculation for us: set_face_normal()
+    Assume vector passed to the function is of unit length
+
+Add surface side determination to the class
+
+
+
+
+
+6.5 A List of Hittable Objects
+
+Now have a generic object called hittable that the ray can intersect with. 
+
+Add a class that stores a list of hittables!
