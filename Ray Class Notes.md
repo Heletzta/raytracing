@@ -255,3 +255,26 @@ b = -2d * (C - Q)
 b = -2h
 h = b/ -2 = d * (C - Q)
 
+
+
+
+
+
+
+
+6.3 An Abstraction for Hittable Objects
+
+How about more than one sphere? Tempting to have an array of spheres, clean solution is to make an "abstract class" for anything a ray might hit, and make both a sphere and a list of spheres just somethnig that can be hit. Call these classes "hittables"
+
+**This "hittable" abstract class will have a hit function that takes in a ray**
+
+Most ray tracers have found it convenient to add a valid interval for hits tmin and tmax -- hit only "counts" if tmin < t < tmax
+
+Design question: compute the normal if we hit something?
+
+    Might end up hitting something closer as we do our search
+    Only need the normal of the closest thing
+    
+    Simple solution: compute a bundle of things, store it in some structure
+
+
