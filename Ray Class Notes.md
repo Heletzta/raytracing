@@ -346,3 +346,12 @@ Add surface side determination to the class
 Now have a generic object called hittable that the ray can intersect with. 
 
 Add a class that stores a list of hittables!
+
+
+
+
+
+
+
+6.6 Some New C++ Features
+
