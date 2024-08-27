@@ -355,3 +355,39 @@ Add a class that stores a list of hittables!
 
 6.6 Some New C++ Features
 
+Hittable_list class code uses some C++ features that you might not know if you're not a C++ programmer: vector, shared_ptr, and make_shared
+
+shared_ptr<type> is a pointer to some allocated type, with reference-counting semantics. Every time you assign its value to another shared pointer, the reference count is incremented. As shared pointers go out of scope, the reference count is decremented. Once the count goes to 0, the object is safely deleted
+
+shared pointer is first initialized with a newly allocated object -- like this:
+
+shared_ptr<double> double_ptr = make_shared<double>(0.37);
+shared_ptr<vec3>   vec3_ptr   = make_shared<vec3>(1.414214, 2.718281, 1.618034);
+shared_ptr<sphere> sphere_ptr = make_shared<sphere>(point3(0,0,0), 1.0);
+
+
+make_shared<thing>(thing_constructor params...) allocates a new instance of type "thing", using the constructor parameteres. It returns a shared_ptr<thing>
+
+Since the typee can be automatically deduced by the return type of make_shared<type>(...), the above lines can be more simply expressed using c++'s auto type:
+
+auto double_ptr = make_shared<double>(0.37);
+auto vec3_ptr   = make_shared<vec3>(1.414214, 2.718281, 1.618034);
+auto sphere_ptr = make_shared<sphere>(point3(0,0,0), 1.0);
+
+We'll use shared pointers in our vode because it allows multiple geometries to share a common instance (for example, a bunch of spheres that all use the same color material), and because it makes memory management automatic and easier to reason about
+
+std::shared_ptr is included with the <memory> header
+
+
+
+2ND C++ FEATURE
+
+std::vector
+
+A generic array-like collection of an arbitary type. Use a collection of pointers to hittable. 
+
+std::vector automatically grows as more values are added: objects.push_back(object) adds a value to the end of the std::vector member variable objects
+
+std::vector is included with the <vector> header
+
+the using statements tell the compiler that we'll be getting shared_ptr and make_shared from the std library, so we don't need to prefix these with std:: every time we reference them
