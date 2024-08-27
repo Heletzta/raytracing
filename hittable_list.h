@@ -3,11 +3,9 @@
 
 #include "hittable.h"
 
-#include <memory>
 #include <vector>
 
-using std::make_shared;
-using std::shared_ptr;
+
 
 class hittable_list : public hittable {
     public:
@@ -31,7 +29,7 @@ class hittable_list : public hittable {
             auto closest_so_far = ray_tmax;
 
             for (const auto& object: objects) {
-                if (object --> hit(r, ray_tmin, closest_so_far, temp_rec)) {
+                if (object->hit(r, ray_tmin, closest_so_far, temp_rec)) {
                     hit_anything = true;
                     closest_so_far = temp_rec.t;
                     rec = temp_rec; 

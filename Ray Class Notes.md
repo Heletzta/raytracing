@@ -391,3 +391,19 @@ std::vector automatically grows as more values are added: objects.push_back(obje
 std::vector is included with the <vector> header
 
 the using statements tell the compiler that we'll be getting shared_ptr and make_shared from the std library, so we don't need to prefix these with std:: every time we reference them
+
+
+
+
+
+
+6.7 Common Constants and Utility Functions
+
+Need some math constants that we conveniently define in their own header file
+
+Only need infinity, but throw pi in there which we will need later
+
+Also throw common useful constants and future utility functions here
+
+header, rtweekend.h, will be our general main header file
+
