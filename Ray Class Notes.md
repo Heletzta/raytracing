@@ -236,4 +236,22 @@ Assume closest hit point (smallest t) is the one that we want.
 
 6.2 Simplifying the Ray-Sphere Intersection Code
 
-Recall: 
+Recall: a vector dotted with itself is equal to the squared length of that vector
+
+Notice: equation for b has a factor of -2 in it. 
+Consider what happens to the quadratic equation if b = -2h:
+
+b = -2.0 * dot(r.direction(), oc)
+
+b = -2h
+
+h = dot(r.direction(), oc)
+
+t = h +- sqrt(h^2 - ac) / a
+
+Nice simplification!
+
+b = -2d * (C - Q)
+b = -2h
+h = b/ -2 = d * (C - Q)
+
