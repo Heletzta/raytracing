@@ -231,3 +231,9 @@ Only have one sphere in the scene -- directly in front of the camera -- don't ne
 Assume closest hit point (smallest t) is the one that we want. 
 
 
+
+
+
+6.2 Simplifying the Ray-Sphere Intersection Code
+
+Recall: 
